@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Disponibilidade de Comunicacao - Geral</title>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script type="text/javascript">
+     window.onload = function()
+     {
+
+         <!--Grafico do Aparelho Haacke-->
+         $.get("../monitoramento/colombari.csv", function(data) {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                     text: "Aparelho Haacke",
+                },
+                axisY:{
+                    title: "",
+                    maximum: 1,
+                    gridThickness: 0,
+                },
+                axisX:{
+                	crosshair: {
+			            enabled: true,
+			            valueFormatString: "####"
+		            },
+                    title: "",
+                    labelAngle: -90,
+                    valueFormatString: "DD-MM-YY HH:mm:ss",
+                     labelFontSize: 10,
+                },
+                data: [{
+                     type: "line",
+                     dataPoints: getDataPointsFromCSV(data)
+                  }]
+             });
+
+              chart.render();
+         });
+
+         <!--Grafico do Aparelho Starmilk-->
+         $.get("../monitoramento/starmilk.csv", function(data) {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                     text: "Aparelho Haacke",
+                },
+                axisY:{
+                    title: "",
+                    maximum: 1,
+                    gridThickness: 0,
+                },
+                axisX:{
+                	crosshair: {
+			            enabled: true,
+			            valueFormatString: "####"
+		            },
+                    title: "",
+                    labelAngle: -90,
+                    valueFormatString: "DD-MM-YY HH:mm:ss",
+                     labelFontSize: 10,
+                },
+
+                data: [{
+                     type: "line",
+                     dataPoints: getDataPointsFromCSV(data)
+                  }]
+             });
+
+              chart.render();
+         });
+
+        var dataPoints = [];
+
+        var totalPing;
+        var totalFalha;
+        var aparelho;
+
+        function getDataPointsFromCSV(csv)
+        {
+            var dataPoints = csvLines = points = [];
+            csvLines = csv.split(/[\r?\n|\r|\n]+/);
+
+            totalPing = 0;
+            totalFalha = 0;
+            aparelho = 0;
+
+            for (var i = csvLines.length - 2; i > 0; i--)
+            {
+
+                if (csvLines[i].length > 0)
+                {
+                    points = csvLines[i].split(",");
+                    if (points[1]!="PASS")
+                    {
+                       totalFalha++;
+                       aparelho = 0;
+                    }
+                    else
+                    {
+                        aparelho = 1;
+                    }
+                    totalPing++;
+                }
+                 dataPoints.push(
+                 {
+                     label: points[0],
+                     y: parseFloat(aparelho)
+                 });
+            }
+
+            return dataPoints;
+         }
+
+
+        <!--Funcao do Indicador de Disponibilidade-->
+        function getDataPointsInd()
+        {
+            dataPoints.push(
+            {
+                 label: "Total",
+                 y: (1-((1023+59+12)/(1569+96+57)))
+            });
+
+            dataPoints.push(
+            {
+                 label: "2018",
+                    y: (1-((1023+59+12)/(1569+96+57)))
+            });
+            <!--dataPoints.push(-->
+            <!--{-->
+                 <!--label: "Colombari",-->
+                 <!--y: (1-(1023/1569))-->
+            <!--});-->
+            <!--dataPoints.push(-->
+            <!--{-->
+                 <!--label: "Haacke",-->
+                 <!--y: (1-(59/96))-->
+            <!--});-->
+            <!--dataPoints.push(-->
+            <!--{-->
+                 <!--label: "Starmilk",-->
+                 <!--y: (1-(12/57))-->
+            <!--});-->
+            dataPoints.push(
+            {
+                 label: "Janeiro",
+                 y: (1-(12/57))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Fevereiro",
+                 y: (1-(12/62))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Março",
+                 y: (1-(12/23))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Abril",
+                 y: (1-(12/15))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Maio",
+                 y: (1-(12/44))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Junho",
+                 y: (1-(12/28))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Julho",
+                 y: (1-(12/19))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Agosto",
+                 y: (1-(12/27))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Setembro",
+                 y: (1-(12/45))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Outubro",
+                 y: (1-(12/86))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Novembro",
+                 y: (1-(12/29))
+            });
+
+            dataPoints.push(
+            {
+                 label: "Dezembro",
+                 y: (1-(12/68))
+            });
+
+
+            return dataPoints;
+        }
+
+    <!--Grafico de Disponibilidade-->
+	$.get("../monitoramento/colombari.csv", function(data) {
+	    var chart = new CanvasJS.Chart("chartContainer-aparelho", {
+	    	animationEnabled: true,
+		    title: {
+		         text: "Disponibilidade de Comunicacao Total",
+		    },
+            axisY:{
+                maximum: 1,
+                gridThickness: 0,
+                title: "",
+                tickLength: 0,
+                margin:0,
+                lineThickness:0,
+                valueFormatString:" ", //comment this to show numeric values
+            },
+            axisX:{
+                title: "",
+                labelAngle: -90,
+                labelFontSize: 16,
+            },
+		    data: [{
+		    	yValueFormatString: "## %",
+		        indexLabel: "{y}",
+		        indexLabelFontSize: 25,
+		        type: "column",
+		        dataPoints: getDataPointsInd()
+		      }]
+	     });
+
+	      chart.render();
+
+	});
+  }
+</script>
+</head>
+<body>
+<div id="chartContainer-aparelho" style="width:100%; height:600px;"></div>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard Monitoramento</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="libs/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="libs/css/dashboard.css" rel="stylesheet">
+    <style type="text/css">/* Chart.js */
+            @-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><img style="width:80px;" src="images/logos/cibiogas-logosmall.jpg" alt="cibiogas-logo"></a>
+    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">Sign in</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            Dashboard <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/colombari.html?_ijt=1escgdsapfmftfgqa73efqssa8">
+                            <i data-feather="bar-chart-2"></i>
+                            Colombari
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/haacke.html?_ijt=1escgdsapfmftfgqa73efqssa8">
+                            <i data-feather="bar-chart-2"></i>
+                            Haacke
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/starmilk.html?_ijt=1escgdsapfmftfgqa73efqssa8">
+                            <i data-feather="bar-chart-2"></i>
+                            Starmilk
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/stein.html?_ijt=d1kqvc1vj7qsq688iv52brrtbd">
+                            <i data-feather="bar-chart-2"></i>
+                            Stein
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/itaipu.html?_ijt=h3c2ptulctr8aen50fj1ptsehr">
+                            <i data-feather="bar-chart-2"></i>
+                            Itaipu
+                        </a>
+                    </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span>Saved reports</span>
+                    <a class="d-flex align-items-center text-muted" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            Current month
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            Last quarter
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            Social engagement
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                            Year-end sale
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h1 class="h2">Dashboard</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-toggle="dropdown">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item selected" name="btnDezembro" id="btnDezembro">Dezembro</a>
+                            <a class="dropdown-item selected" name="btnNovembro" id="btnNovembro">Novembro</a>
+                            <!--<a class="dropdown-item selected" name="btnNovembro" id="btnNovembro">Novembro</a>-->
+                            <!--<a class="dropdown-item" name="btnOutubro" id="btnOutubro">Outubro</a>-->
+                            <!--<a class="dropdown-item" name="btnSetembro" id="btnSetembro">Setembro</a>-->
+                            <!--<a class="dropdown-item" name="btnAgosto" id="btnAgosto">Agosto</a>-->
+                            <!--<a class="dropdown-item" name="btnJulho" id="btnJulho">Julho</a>-->
+                            <!--<a class="dropdown-item" name="btnJunho" id="btnJunho">Junho</a>-->
+                            <!--<a class="dropdown-item" name="btnMaio" id="btnMaio">Maio</a>-->
+                            <!--<a class="dropdown-item" name="btnAbril" id="btnAbril">Abril</a>-->
+                            <!--<a class="dropdown-item" name="btnMarço" id="btnMarço">Março</a>-->
+                            <!--<a class="dropdown-item" name="btnFevereiro" id="btnFevereiro">Fevereiro</a>-->
+                            <!--<a class="dropdown-item" name="btnJaneiro" id="btnJaneiro">Janeiro</a>-->
+                        </div>
+                    </div>
+                    <div class="btn-group mr-3">
+                        <button class="btn btn-sm btn-outline-secondary">Compartilhar</button>
+                        <button class="btn btn-sm btn-outline-secondary">Exportar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="chartContainer-aparelho" style="width:100%; height:470px;"></div>
+            <div style="width:100%; height:20px;"></div>
+            <footer class="footer">
+                <div class="container">
+                    <span class="text-muted float-right">2018 - Centro Internacional de Energias Renováveis - Biogás</span>
+                </div>
+            </footer>
+            <div style="width:100%; height:10px;"></div>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="libs/bootstrap4/js/popper.min.js"></script>
+<script src="libs/bootstrap4/js/bootstrap.min.js"></script>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+  feather.replace()
+</script>
+
+<!-- Graphs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<script src="https://unpkg.com/feather-icons"></script>
+<script type="text/javascript">
+window.onload = function()
+{
+    <!--variaveis globais-->
+    var dataAtual = new Date();
+    console.log(dataAtual);
+    var dataPoints = [];
+    var totalPing = 0;
+    var totalFalha = 0;
+
+    atualiza_dashboard();
+
+    function atualiza_dashboard()
+    {
+        <!--Grafico de Disponibilidade-->
+        $.get("../monitoramento/base-total.csv", function(data)
+        {
+            var chart = new CanvasJS.Chart("chartContainer-aparelho",
+            {
+                animationEnabled: true,
+                title: {
+                     text: "Disponibilidade de Comunicação Total",
+                },
+                axisY:{
+                    maximum: 1,
+                    gridThickness: 0,
+                    title: "",
+                    tickLength: 0,
+                    margin:0,
+                    lineThickness:0,
+                    valueFormatString:" ", //comment this to show numeric values
+                },
+                data: [{
+                    yValueFormatString: "## %",
+                    indexLabel: "{y}",
+                    indexLabelFontSize: 40,
+                    type: "column",
+                    dataPoints:getDataPointsFromCSV(data)
+                  }]
+            });
+
+            <!--Precisa renderizar antes para tornar o chart clicavel-->
+            chart.render();
+
+            <!--logica que cria o link clicavel apos ser formado-->
+            for (i=1; i < chart.data[0].dataPoints.length;i++)
+            {
+                if(chart.data[0].dataPoints[i].label=="Haacke")
+                {
+                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/haacke.html?_ijt=1escgdsapfmftfgqa73efqssa8";};
+                }
+                else if(chart.data[0].dataPoints[i].label=="Itaipu")
+                {
+                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/itaipu.html?_ijt=h3c2ptulctr8aen50fj1ptsehr";};
+                }
+                else if(chart.data[0].dataPoints[i].label=="Colombari")
+                {
+                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/colombari.html?_ijt=1escgdsapfmftfgqa73efqssa8";};
+                }
+                else if(chart.data[0].dataPoints[i].label=="Stein")
+                {
+                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/stein.html?_ijt=d1kqvc1vj7qsq688iv52brrtbd";};
+                }
+                else if(chart.data[0].dataPoints[i].label=="Starmilk")
+                {
+                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/starmilk.html?_ijt=1escgdsapfmftfgqa73efqssa8";};
+                }
+            }
+
+
+        });
+    }
+
+    <!--Logica responsavel por tratar os dados vindo do CSV-->
+    function getDataPointsFromCSV(csv)
+    {
+        <!--console.log(csv)-->
+        var dataPoints = csvLines = points = [];
+        csvLines = csv.split(/[\r?\n|\r|\n]+/);
+        var ano = 0;
+        for (var i = csvLines.length - 1; i > 0; i--)
+        {
+
+            if (csvLines[i].length > 0)
+            {
+                points = csvLines[i].split(",");
+
+                if(dataAtual.getYear()==(points[1]-1900))
+                {
+                    if(ano==0)
+                    {
+                       dataPoints.push(
+                       {
+                            label: points[1],
+                            y: parseFloat(0)
+                       });
+                       ano = 1;
+                    }
+
+                    totalPing=parseFloat(points[3])+totalPing;
+                    totalFalha=parseFloat(points[4])+totalFalha;
+
+                    <!--Verificar o mes atual e compara com a segunda coluna do csv-->
+                    if(dataAtual.getMonth() == (points[2]-1))
+                    {
+                        dataPoints.push(
+                        {
+                            label: points[0],
+                            y: parseFloat(points[5]/10000)
+                        });
+                    }
+                }
+            }
+        }
+
+        <!--Atualiza o valor do ano atual-->
+        dataPoints[0].y = (1-(totalFalha/totalPing));
+
+        return dataPoints;
+    }
+
+    $('#btnDezembro').click(function()
+    {
+        dataAtual = new Date('12-28-2018');
+        atualiza_dashboard();
+    });
+
+    $('#btnNovembro').click(function()
+    {
+      dataAtual = new Date('11-28-2018');
+      atualiza_dashboard();
+    });
+
+}
+</script>
+</body>
+</html>

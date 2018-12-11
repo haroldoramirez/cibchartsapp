@@ -1,0 +1,11 @@
+origem,ano,mes,total_ping,total_falha,porcentagem
+Starmilk,2018,11,0,0,0
+Starmilk,2018,12,2687,207,9229
+Stein,2018,11,0,0,0
+Stein,2018,12,2224,194,9127
+Itaipu,2018,11,0,0,0
+Itaipu,2018,12,2243,5,9977
+Colombari,2018,11,1569,1021,3492
+Colombari,2018,12,0,0,0
+Haacke,2018,11,1611,59,9633
+Haacke,2018,12,1533,522,6594

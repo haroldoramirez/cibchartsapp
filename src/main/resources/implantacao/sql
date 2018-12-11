@@ -1,0 +1,17 @@
+create table dashboard (
+id                           bigserial not null,
+origem                  varchar(50) not null,
+ano                        timestamp not null,
+mes                       timestamp not null,
+dia                         timestamp not null,
+total_ping             int,
+total_falhas          int,
+dc                          real,
+constraint pk_dashboard primary key (id));
+
+create table tentativas (
+id                           bigserial not null,
+origem            varchar(50) not null,
+tempo                     timestamp not null,
+tentativa                varchar(5),
+constraint pk_dashboard primary key (id));

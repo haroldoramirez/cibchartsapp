@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Aparelho Haacke</title>
+    <!-- Bootstrap core CSS -->
+    <link href="../utils/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Open Ionic core CSS -->
+    <!--<link href="../utils/open-ionic/font/css/open-ionic-bootstrap.min.css" rel="stylesheet">-->
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+window.onload = function()
+{
+
+    <!--variaveis globais-->
+    var dataAtual = new Date();
+    var totalPing;
+    var totalFalha;
+    var mes;
+
+    <!--Muda as cores dos Charts-->
+    CanvasJS.addColorSet("cibShades",
+    [//colorSet Array
+    "#4f81bc",
+    "#689f38",
+    "#f58634"
+    ]);
+
+    <!--Logica para os meses-->
+    var month = new Array();
+    month[0] = "Janeiro";
+    month[1] = "Fevereiro";
+    month[2] = "Março";
+    month[3] = "Abril";
+    month[4] = "Maio";
+    month[5] = "Junho";
+    month[6] = "Julho";
+    month[7] = "Agosto";
+    month[8] = "Setembro";
+    month[9] = "Outubro";
+    month[10] = "Novembro";
+    month[11] = "Dezembro";
+
+    <!--Escreve a primeira vez o grafico dos Dias-->
+    atualizaDias(month[dataAtual.getMonth()]);
+
+    <!--Grafico de Tentativas Comunicacao nao mexer ainda-->
+    $.get("../monitoramento/base-haacke.csv", function(data)
+    {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+                 text: "Tentativas de Conexão - Haacke",
+            },
+            axisY:{
+                title: "",
+                maximum: 1,
+                gridThickness: 0,
+                labelFormatter: function(e) {
+                    if (e.value == 1) {
+                        return "Conectado";
+                    }
+                    if (e.value == 0) {
+                        return  "Desconectado";
+                    }
+                    return " ";
+                }
+            },
+            axisX:{
+                crosshair: {
+                    enabled: true,
+                    valueFormatString: "####"
+                },
+                title: "",
+                labelAngle: -90,
+                valueFormatString: "DD-MM-YY HH:mm:ss",
+                labelFontSize: 10
+            },
+            data: [{
+                 type: "line",
+                 dataPoints: getDataPointsFromCSV(data)
+            }]
+         });
+
+        chart.render();
+    });
+
+    <!--Funcao responsavel por verificar o conteudo do arquivo .csv-->
+    function getDataPointsFromCSV(csv)
+    {
+        var dataPoints = csvLines = points = [];
+        csvLines = csv.split(/[\r?\n|\r|\n]+/);
+
+        totalPing = 0;
+        totalFalha = 0;
+        aparelho = 0;
+
+
+        for (var i = csvLines.length - 2; i > 0; i--)
+        {
+
+            if (csvLines[i].length > 0)
+            {
+                points = csvLines[i].split(",");
+
+                if (points[1]!="PASS")
+                {
+                   totalFalha++;
+                   aparelho = 0;
+                }
+                else
+                {
+                    aparelho = 1;
+                }
+
+                totalPing++;
+
+            }
+
+            dataPoints.push(
+            {
+                label: points[0],
+                y: parseFloat(aparelho)
+            });
+        }
+
+        return dataPoints;
+    }
+
+    atualizaMeses();
+
+    function atualizaMeses(){<!--Grafico de Disponibilidade em Meses-->
+        $.get("../monitoramento/base-total.csv", function(data)
+        {
+
+            <!--a variavel data sao os dados do arquivo csv-->
+            var chart = new CanvasJS.Chart("chartContainer-aparelho", {
+                animationEnabled: true,
+                title: {
+                     text: "Disponibilidade de Comunicação - Haacke",
+                },
+                axisY:{
+                    maximum: 1,
+                    gridThickness: 0,
+                    title: "",
+                    tickLength: 0,
+                    margin:0,
+                    lineThickness:0,
+                    valueFormatString:" ", //comment this to show numeric values
+                },
+                data: [{
+                    yValueFormatString: "## %",
+                    indexLabel: "{y}",
+                    indexLabelFontSize: 20,
+                    type: "column",
+                    dataPoints: getDataPointsIndMeses(data)
+                }]
+
+            });
+
+            chart.render();
+
+        });
+    };
+
+    <!--Funcao do Indicador de Disponibilidade de Comunicacao em Meses-->
+    function getDataPointsIndMeses(csv)
+    {
+        totalPing = 0;
+        totalFalha = 0;
+
+        var dataPoints = csvLines = points = [];
+        csvLines = csv.split(/[\r?\n|\r|\n]+/);
+        var ano = 0;
+        mesAtual=dataAtual.getMonth();
+
+
+        dataPoints.push(
+        {
+             label: "2018",
+             y: (0)
+        });
+
+       dataPoints.push(
+        {
+             label: "Janeiro",
+             y: (0),
+             color: "#f58634",
+              click: function(e){
+                dataAtual = new Date('01-01-2018'),
+                atualizaDias("Janeiro"),
+                atualizaMeses();
+                }
+
+        });
+
+        dataPoints.push(
+        {
+             label: "Fevereiro",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('02-01-2018'),
+                atualizaDias("Fevereiro"),
+                atualizaMeses();
+                }
+        });
+
+        dataPoints.push(
+        {
+             label: "Março",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('03-01-2018'),
+                atualizaDias("Março"),
+                atualizaMeses();
+                }
+        });
+
+        dataPoints.push(
+        {
+             label: "Abril",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('04-01-2018'),
+                atualizaDias("Abril"),
+                atualizaMeses();
+                }
+        });
+
+        dataPoints.push(
+        {
+             label: "Maio",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('05-01-2018'),
+                atualizaDias("Maio"),
+                atualizaMeses();
+                }
+        });
+
+        dataPoints.push(
+        {
+             label: "Junho",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('06-01-2018'),
+                atualizaDias("Junho"),
+                atualizaMeses();
+                }
+        });
+
+        dataPoints.push(
+        {
+             label: "Julho",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('07-01-2018'),
+                atualizaDias("Julho"),
+                atualizaMeses();
+                }
+        });
+
+        dataPoints.push(
+        {
+             label: "Agosto",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('08-01-2018'),
+                atualizaDias("Agosto"),
+                atualizaMeses();
+                }
+        });
+
+        dataPoints.push(
+        {
+             label: "Setembro",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('09-01-2018'),
+                atualizaDias("Setembro"),
+                atualizaMeses();
+                }
+        });
+
+        dataPoints.push(
+        {
+             label: "Outubro",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('10-01-2018'),
+                atualizaDias("Outubro"),
+                atualizaMeses();
+                }
+        });
+
+        dataPoints.push(
+        {
+             label: "Novembro",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('11-01-2018'),
+                atualizaDias("Novembro"),
+                atualizaMeses();
+             }
+        });
+
+        dataPoints.push(
+        {
+             label: "Dezembro",
+             y: (0),
+             color: "#f58634",
+             click: function(e){
+                dataAtual = new Date('12-01-2018'),
+                atualizaDias("Dezembro"),
+                atualizaMeses();
+             }
+        });
+
+        for (var i = 1; i < csvLines.length; i++)
+        {
+
+            if (csvLines[i].length > 0)
+            {
+                points = csvLines[i].split(",");
+
+                if(dataAtual.getYear()==(points[1]-1900))
+                {
+
+                    if((points[0]) == "Haacke")
+                    {
+                        totalPing=parseFloat(points[3])+totalPing;
+                        totalFalha=parseFloat(points[4])+totalFalha;
+                        dataPoints[points[2]].y = points[5]/10000;
+                    }
+                }
+            }
+        }
+
+        <!--Atualiza o valor do ano atual-->
+        dataPoints[0].y = (1-(totalFalha/totalPing));
+        dataPoints[dataAtual.getMonth()+1].color = "green";
+
+        return dataPoints;
+    }
+
+    function atualizaDias(mes)
+    {
+        <!--Grafico de Disponibilidade Aparelho Dia - pega a base calculada-->
+        $.get("../monitoramento/base-calculada-dia.csv", function(data)
+        {
+            var chart = new CanvasJS.Chart("chartContainer-aparelho-dia", {
+                animationEnabled: true,
+                title: {
+                     text: "Disponibilidade de Comunicação por Dia - Haacke - " + mes,
+                },
+                axisY:{
+                    maximum: 1.4,
+                    gridThickness: 0,
+                    title: "",
+                    tickLength: 0,
+                    margin:0,
+                    lineThickness:0,
+                    valueFormatString:" ", //comment this to show numeric values
+                    labelFormatter: function(e) {
+                        if (e.value == 0) {
+                            return "Dias";
+                        }
+                        return " ";
+                    },
+                },
+                axisX:{
+                    crosshair: {
+                        enabled: true,
+                        valueFormatString: "####"
+                    },
+                    title: "",
+                    interval: 1
+                },
+                data: [{
+                    type: "line",
+                    yValueFormatString: "## %",
+                    indexLabel: "{y}",
+                    indexLabelFontSize: 15,
+                    dataPoints: getDataPointsIndDia(data)
+                  }]
+
+        });
+
+        <!--Funcao do Indicador de Disponibilidade de Comunicacao por Dia-->
+        function getDataPointsIndDia(csv)
+        {
+            var dataPoints = csvLines = points = [];
+            csvLines = csv.split(/[\r?\n|\r|\n]+/);
+            var ano = 0;
+            for (var i = 0; i < csvLines.length - 1; i++)
+            {
+                if (csvLines[i].length > 0)
+                {
+                    points = csvLines[i].split(",");
+
+                    totalPing=parseFloat(points[3])+totalPing;
+                    totalFalha=parseFloat(points[4])+totalFalha;
+
+                    <!--Verificar qual origem antes de mostrar no grafico-->
+                    if((points[0]) == "Haacke")
+                    {
+                        <!--Verificar o mes atual e compara com a segunda coluna do csv-->
+                        if(dataAtual.getMonth() == (points[2]-1))
+                        {
+                            dataPoints.push(
+                            {
+                                label: points[3],
+                                y: parseFloat(points[6]/10000)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return dataPoints;
+        }
+
+        chart.render();
+
+        });
+	}
+}
+</script>
+</head>
+<body>
+<nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><img style="width:80px;" src="http://localhost:63342/cibcharts/img/logos/cibiogas-logosmall.jpg" alt="cibiogas-logo"></a>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="http://localhost:63342/cibcharts/pages/dashboard.html?_ijt=d7f92tl97j9ahlpmdtet7lo5f8">Voltar</a>
+        </li>
+    </ul>
+</nav>
+<div style="width:100%; height:50px"></div>
+<div id="chartContainer-aparelho" style="width:100%; height:200px;"></div>
+<div id="chartContainer-aparelho-dia" style="width:100%; height:200px;"></div>
+<div id="chartContainer" style="width:100%; height:200px;"></div>
+</body>
+</html>

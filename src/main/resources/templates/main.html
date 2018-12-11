@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Disponibilidade de Comunicacao - Geral</title>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+window.onload = function()
+{
+
+    <!--Grafico de Disponibilidade-->
+    $.get("../monitoramento/colombari.csv", function(data)
+    {
+        var chart = new CanvasJS.Chart("chartContainer-aparelho",
+        {
+            animationEnabled: true,
+            title: {
+                 text: "Disponibilidade de Comunicação Total",
+            },
+            axisY:{
+                maximum: 1,
+                gridThickness: 0,
+                title: "",
+                tickLength: 0,
+                margin:0,
+                lineThickness:0,
+                valueFormatString:" ", //comment this to show numeric values
+            },
+            data: [{
+                yValueFormatString: "## %",
+                indexLabel: "{y}",
+                indexLabelFontSize: 40,
+                type: "column",
+                dataPoints: getDataPointsInd()
+              }]
+        });
+        chart.render();
+    });
+
+    var dataPoints = [];
+    var totalPing;
+    var totalFalha;
+    var aparelho;
+
+    function getDataPointsFromCSV(csv)
+    {
+        var dataPoints = csvLines = points = [];
+        csvLines = csv.split(/[\r?\n|\r|\n]+/);
+
+        totalPing = 0;
+        totalFalha = 0;
+        aparelho = 0;
+
+        for (var i = csvLines.length - 2; i > 0; i--)
+        {
+
+            if (csvLines[i].length > 0)
+            {
+                points = csvLines[i].split(",");
+                if (points[1]!="PASS")
+                {
+                   totalFalha++;
+                   aparelho = 0;
+                }
+                else
+                {
+                    aparelho = 1;
+                }
+                totalPing++;
+            }
+             dataPoints.push(
+             {
+                 label: points[0],
+                 y: parseFloat(aparelho)
+             });
+        }
+        return dataPoints;
+    }
+
+
+    <!--Funcao do Indicador de Disponibilidade-->
+    function getDataPointsInd()
+    {
+        dataPoints.push(
+        {
+             label: "Total",
+             y: (1-((1023+59+12)/(1569+96+57)))
+        });
+
+        dataPoints.push(
+        {
+             label: "2018",
+                y: (1-((1023+59+12)/(1569+96+57)))
+        });
+        dataPoints.push(
+        {
+             label: "Colombari",
+             y: (1-(1023/1569)),
+             click: function(e){
+                window.open("http://localhost:63342/cibcharts/pages/colombari.html?_ijt=1escgdsapfmftfgqa73efqssa8");
+             },
+        });
+        dataPoints.push(
+        {
+             label: "Haacke",
+             y: (1-(59/96)),
+             click: function(e){
+                window.open("http://localhost:63342/cibcharts/pages/haacke.html?_ijt=1escgdsapfmftfgqa73efqssa8");
+             },
+        });
+        dataPoints.push(
+        {
+             label: "Starmilk",
+             y: (1-(12/57)),
+             click: function(e){
+                window.open("http://localhost:63342/cibcharts/pages/starmilk.html?_ijt=1escgdsapfmftfgqa73efqssa8");
+             },
+        });
+        return dataPoints;
+    }
+}
+</script>
+</head>
+<body>
+<div id="chartContainer-aparelho" style="width:100%; height:600px;"></div>
+</body>
+</html>
