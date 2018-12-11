@@ -19,7 +19,7 @@
 
 <body>
 <nav class="navbar navbar-light fixed-top bg-light flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#"><img style="width:80px;" src="images/logos/cibiogas-logosmall.jpg" alt="cibiogas-logo"></a>
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/"><img style="width:80px;" src="images/logos/cibiogas-logosmall.jpg" alt="cibiogas-logo"></a>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
@@ -40,31 +40,31 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/colombari.html?_ijt=1escgdsapfmftfgqa73efqssa8">
+                        <a class="nav-link" href="/colombari">
                             <i data-feather="bar-chart-2"></i>
                             Colombari
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/haacke.html?_ijt=1escgdsapfmftfgqa73efqssa8">
+                        <a class="nav-link" href="/haacke">
                             <i data-feather="bar-chart-2"></i>
                             Haacke
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/starmilk.html?_ijt=1escgdsapfmftfgqa73efqssa8">
+                        <a class="nav-link" href="/starmilk">
                             <i data-feather="bar-chart-2"></i>
                             Starmilk
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/stein.html?_ijt=d1kqvc1vj7qsq688iv52brrtbd">
+                        <a class="nav-link" href="/stein">
                             <i data-feather="bar-chart-2"></i>
                             Stein
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:63342/cibcharts/pages/itaipu.html?_ijt=h3c2ptulctr8aen50fj1ptsehr">
+                        <a class="nav-link" href="/itaipu">
                             <i data-feather="bar-chart-2"></i>
                             Itaipu
                         </a>
@@ -215,23 +215,23 @@ window.onload = function()
             {
                 if(chart.data[0].dataPoints[i].label=="Haacke")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/haacke.html?_ijt=1escgdsapfmftfgqa73efqssa8";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="/haacke";};
                 }
                 else if(chart.data[0].dataPoints[i].label=="Itaipu")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/itaipu.html?_ijt=h3c2ptulctr8aen50fj1ptsehr";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="/itaipu";};
                 }
                 else if(chart.data[0].dataPoints[i].label=="Colombari")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/colombari.html?_ijt=1escgdsapfmftfgqa73efqssa8";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="/colombari";};
                 }
                 else if(chart.data[0].dataPoints[i].label=="Stein")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/stein.html?_ijt=d1kqvc1vj7qsq688iv52brrtbd";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="/stein";};
                 }
                 else if(chart.data[0].dataPoints[i].label=="Starmilk")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="http://localhost:63342/cibcharts/pages/starmilk.html?_ijt=1escgdsapfmftfgqa73efqssa8";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="/starmilk";};
                 }
             }
 
