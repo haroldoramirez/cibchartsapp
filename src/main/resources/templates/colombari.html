@@ -47,7 +47,7 @@ window.onload = function()
     atualizaDias(month[dataAtual.getMonth()]);
 
     <!--Grafico de Tentativas Comunicacao nao mexer ainda-->
-    $.get("../monitoramento/base-colombari.csv", function(data)
+    $.get("monitoramento/base-colombari.csv", function(data)
     {
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
@@ -132,7 +132,7 @@ window.onload = function()
     atualizaMeses();
 
     function atualizaMeses(){<!--Grafico de Disponibilidade em Meses-->
-        $.get("../monitoramento/base-total.csv", function(data)
+        $.get("monitoramento/base-total.csv", function(data)
         {
 
             <!--a variavel data sao os dados do arquivo csv-->
@@ -358,7 +358,7 @@ window.onload = function()
     function atualizaDias(mes)
     {
         <!--Grafico de Disponibilidade Aparelho Dia - pega a base calculada-->
-        $.get("../monitoramento/base-calculada-dia.csv", function(data)
+        $.get("monitoramento/base-calculada-dia.csv", function(data)
         {
             var chart = new CanvasJS.Chart("chartContainer-aparelho-dia", {
                 animationEnabled: true,

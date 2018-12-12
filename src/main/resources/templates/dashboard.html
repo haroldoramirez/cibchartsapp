@@ -40,33 +40,33 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/colombari">
+                        <a class="nav-link" href="colombari">
                             <i data-feather="bar-chart-2"></i>
                             Colombari
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/haacke">
+                        <a class="nav-link" href="itaipu">
+                            <i data-feather="bar-chart-2"></i>
+                            Itaipu
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="haacke">
                             <i data-feather="bar-chart-2"></i>
                             Haacke
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/starmilk">
+                        <a class="nav-link" href="starmilk">
                             <i data-feather="bar-chart-2"></i>
                             Starmilk
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/stein">
+                        <a class="nav-link" href="stein">
                             <i data-feather="bar-chart-2"></i>
                             Stein
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/itaipu">
-                            <i data-feather="bar-chart-2"></i>
-                            Itaipu
                         </a>
                     </li>
                 </ul>
@@ -181,7 +181,7 @@ window.onload = function()
     function atualiza_dashboard()
     {
         <!--Grafico de Disponibilidade-->
-        $.get("../monitoramento/base-total.csv", function(data)
+        $.get("monitoramento/base-total.csv", function(data)
         {
             var chart = new CanvasJS.Chart("chartContainer-aparelho",
             {
@@ -215,23 +215,23 @@ window.onload = function()
             {
                 if(chart.data[0].dataPoints[i].label=="Haacke")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="/haacke";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="haacke";};
                 }
                 else if(chart.data[0].dataPoints[i].label=="Itaipu")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="/itaipu";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="itaipu";};
                 }
                 else if(chart.data[0].dataPoints[i].label=="Colombari")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="/colombari";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="colombari";};
                 }
                 else if(chart.data[0].dataPoints[i].label=="Stein")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="/stein";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="stein";};
                 }
                 else if(chart.data[0].dataPoints[i].label=="Starmilk")
                 {
-                    chart.data[0].dataPoints[i].click= function(e){location.href="/starmilk";};
+                    chart.data[0].dataPoints[i].click= function(e){location.href="starmilk";};
                 }
             }
 
@@ -298,6 +298,9 @@ window.onload = function()
       dataAtual = new Date('11-28-2018');
       atualiza_dashboard();
     });
+    
+//     var indicador = (1-(3/285))*10000;
+//     console.log(indicador)
 
 }
 </script>

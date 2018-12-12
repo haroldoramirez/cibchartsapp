@@ -1,10 +1,10 @@
 origem,ano,mes,total_ping,total_falha,porcentagem
 Starmilk,2018,11,0,0,0
-Starmilk,2018,12,2687,207,9229
+Starmilk,2018,12,3164,209,9444
 Stein,2018,11,0,0,0
-Stein,2018,12,2224,194,9127
+Stein,2018,12,2701,229,9152
 Itaipu,2018,11,0,0,0
-Itaipu,2018,12,2243,5,9977
+Itaipu,2018,12,2720,5,9981
 Colombari,2018,11,1569,1021,3492
 Colombari,2018,12,0,0,0
 Haacke,2018,11,1611,59,9633

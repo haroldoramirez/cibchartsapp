@@ -8,8 +8,6 @@
     <!-- Bootstrap core CSS -->
     <link href="libs/bootstrap4/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Open Ionic core CSS -->
-    <!--<link href="../utils/open-ionic/font/css/open-ionic-bootstrap.min.css" rel="stylesheet">-->
     <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script type="text/javascript">
@@ -49,7 +47,7 @@ window.onload = function()
     atualizaDias(month[dataAtual.getMonth()]);
 
     <!--Grafico de Tentativas Comunicacao nao mexer ainda-->
-    $.get("../monitoramento/base-haacke.csv", function(data)
+    $.get("monitoramento/base-haacke.csv", function(data)
     {
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
@@ -134,7 +132,7 @@ window.onload = function()
     atualizaMeses();
 
     function atualizaMeses(){<!--Grafico de Disponibilidade em Meses-->
-        $.get("../monitoramento/base-total.csv", function(data)
+        $.get("monitoramento/base-total.csv", function(data)
         {
 
             <!--a variavel data sao os dados do arquivo csv-->
@@ -360,7 +358,7 @@ window.onload = function()
     function atualizaDias(mes)
     {
         <!--Grafico de Disponibilidade Aparelho Dia - pega a base calculada-->
-        $.get("../monitoramento/base-calculada-dia.csv", function(data)
+        $.get("monitoramento/base-calculada-dia.csv", function(data)
         {
             var chart = new CanvasJS.Chart("chartContainer-aparelho-dia", {
                 animationEnabled: true,
