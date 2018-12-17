@@ -13,7 +13,7 @@
 	<groupId>org.cibiogas</groupId>
 	<artifactId>cibcharts</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>cibcharts</name>
 	<description>Demo project for Spring Boot</description>
 	
@@ -59,9 +59,16 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<!--configuracao para fazer a aplicacao como executavel -->
-					<configuration>
+				<configuration>
 						<executable>true</executable>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
